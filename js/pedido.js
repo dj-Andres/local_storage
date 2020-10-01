@@ -4,6 +4,7 @@ const productos=document.getElementById('lista-productos');
 const listaProductos=document.querySelector('#lista-carrito tbody');
 const vaciarCarrito=document.getElementById('vaciar-carrito');
 const procesarPedidobtn=document.getElementById('procesar-pedido');
+
 cargar_evento();
 
 function cargar_evento(){

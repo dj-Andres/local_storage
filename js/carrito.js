@@ -63,7 +63,7 @@
         }
 
         this.eliminarProductoLS(productoID);
-
+        this.calculartotal();
     }
     vaciarCarrito(e) {
         e.preventDefault();
@@ -135,5 +135,49 @@
             location.href='compra.html';
         }
         
+    }
+    leerLocalStorageCompra() {
+        let productosLS;
+        productosLS = this.obtenerProductosLS();
+        productosLS.forEach(function (producto) {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+            <td>
+                <img src="${producto.imagen}" width="100">
+            </td>
+            <td>${producto.titulo}</td>
+            <td>${producto.precio}</td>
+            <td>
+                <input type="number" class="form-control cantidad" min="1" value="${producto.cantidad}">
+            </td>
+            <td>${producto.precio*producto.cantidad}</td>
+            <td>
+                <a href="#" class="borrar-producto fas fa-times-circle" style="font-size:30px;" data-id="${producto.id}"></a>
+            </td>
+        `;
+
+            listaCompra.appendChild(row);
+        })
+    }
+    calculartotal(){
+        let productoLS;
+        let subtotal=0;
+        let total=0;
+        let IVA=0;
+
+        productoLS=this.obtenerProductosLS();
+
+        for(let i = 0; i <productoLS.length; i++){
+            let element=Number(productoLS[i].precio * productoLS[i].cantidad);
+
+            total=total + element;
+
+        }
+        IVA=parseFloat(total * 0.12).toFixed(2);
+        subtotal=parseFloat(total-IVA).toFixed(2);
+        
+        document.getElementById('subtotal').innerHTML="$" + subtotal;
+        document.getElementById('igv').innerHTML="$" + IVA;
+        document.getElementById('total').innerHTML="$" + total.toFixed(2);
     }
 }
