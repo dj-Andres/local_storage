@@ -178,6 +178,6 @@
         
         document.getElementById('subtotal').innerHTML="$" + subtotal;
         document.getElementById('igv').innerHTML="$" + IVA;
-        document.getElementById('total').innerHTML="$" + total.toFixed(2);
+        document.getElementById('total').value="$" + total.toFixed(2);
     }
 }
